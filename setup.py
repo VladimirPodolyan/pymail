@@ -13,7 +13,6 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/VladimirPodolyan/pymail",
     packages=setuptools.find_packages(),
-    install_requires=['pytest>=4.4'],
     classifiers=[
         "Programming Language :: Python :: 3"
     ],
