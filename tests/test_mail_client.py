@@ -5,8 +5,8 @@ import pytest
 import random
 import os
 
-from mail_client import MailClient
-from tests.email_records import NOT_PARSED_EMAIL, PARSED_EMAIL
+from src.mail_client import MailClient
+from src.email_records import NOT_PARSED_EMAIL, PARSED_EMAIL
 
 
 GET_TOKEN = os.environ['GMAIL_TOKEN']
