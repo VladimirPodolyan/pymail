@@ -14,9 +14,6 @@ setuptools.setup(
     url="https://github.com/VladimirPodolyan/pymail",
     packages=setuptools.find_packages(),
     install_requires=['pytest>=4.4'],
-    extras_require={
-        'test': 'pip install -e "git+git@github.com:VladimirPodolyan/pymail.git@add-setup#egg=pymail-0.0.1"'
-    },
     classifiers=[
         "Programming Language :: Python :: 3"
     ],
