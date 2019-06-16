@@ -10,7 +10,7 @@ from src.email_records import NOT_PARSED_EMAIL, PARSED_EMAIL
 
 
 GET_TOKEN = os.environ['GMAIL_TOKEN']
-
+print()
 
 def create_email(random_stamp: int):
     pid = os.getpid()
