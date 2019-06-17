@@ -62,8 +62,10 @@ def test_get_email_from_last_few(imap_client, smtp_client):
 
     expected_email_1 = random.choice(addresses_array)
     expected_email_2 = random.choice(addresses_array)
-    assert imap_client.get_mail_text_from_last_few(expected_email=expected_email_1, last_few=random_count_of_letters * 3)
-    assert imap_client.get_mail_text_from_last_few(expected_email=expected_email_2, last_few=random_count_of_letters * 3)
+    assert imap_client.get_mail_text_from_last_few(expected_email=expected_email_1,
+                                                   last_few=random_count_of_letters * 3)
+    assert imap_client.get_mail_text_from_last_few(expected_email=expected_email_2,
+                                                   last_few=random_count_of_letters * 3)
 
 
 # Tests with mocked data
