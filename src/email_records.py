@@ -22,7 +22,7 @@ Received: from NjkxMzM5Mg (ec2-35-160-91-185.us-west-2.compute.amazonaws.com [35
     Fri, 14 Sep 2018 09:07:53.395 +0000 (UTC)
 Content-Type: multipart/alternative; boundary=d31cee9360929dfd2b7189018fea70c9cb1f37d213ed5b0b935841455965
 Date: Fri, 14 Sep 2018 09:07:53 +0000 (UTC)
-From: "statusnya Support" <notification+ABC123@example.com>
+From: "Support" <notification+ABC123@example.com>
 Mime-Version: 1.0
 Reply-to: support@example.com
 To: test test <www+ABC123@example.com>

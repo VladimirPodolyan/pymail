@@ -54,7 +54,7 @@ class MailClient(object):
             :param label: target label. Will be used this label if then different from MailClient ~ label='inbox'
             :return: parsed text of mail from last mail
         """
-        text_block = self.get_first_text_block(self._email_data_by_id(label, flag, index))
+        text_block = self._get_first_text_block(self._email_data_by_id(label, flag, index))
         return text_block
 
     def get_mail_text_from_last_few(self, expected_email, flag='ALL', last_few=3, timeout=30, label=None):
@@ -83,7 +83,7 @@ class MailClient(object):
             actual_email = self.delivered_to(message_instance)
 
         assert expected_email == actual_email, f'Message for {expected_email} with current settings not found'
-        return self.get_first_text_block(message_instance)
+        return self._get_first_text_block(message_instance)
 
     def delivered_to(self, email_message_instance):
         """
@@ -173,7 +173,7 @@ class MailClient(object):
         id_list = data[0].split()
         return id_list
 
-    def get_first_text_block(self, email_message_instance):
+    def _get_first_text_block(self, email_message_instance):
         """
             Parse the mail content to the text
             :param email_message_instance: content of mail if it's available to parse
