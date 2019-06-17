@@ -1,16 +1,18 @@
 from datetime import datetime
 from unittest import mock
 import smtplib
-import pytest
 import random
 import os
+
+import pytest
 
 from src.mail_client import MailClient
 from src.email_records import NOT_PARSED_EMAIL, PARSED_EMAIL
 
 
+GET_GMAIL_ADDRESS = os.environ['GMAIL_ADDRESS']
 GET_TOKEN = os.environ['GMAIL_TOKEN']
-print()
+
 
 def create_email(random_stamp: int):
     pid = os.getpid()
@@ -60,10 +62,8 @@ def test_get_email_from_last_few(imap_client, smtp_client):
 
     expected_email_1 = random.choice(addresses_array)
     expected_email_2 = random.choice(addresses_array)
-    assert (
-        imap_client.get_mail_text_from_last_few(expected_email=expected_email_1, last_few=random_count_of_letters * 3),
-        imap_client.get_mail_text_from_last_few(expected_email=expected_email_2, last_few=random_count_of_letters * 3)
-    )
+    assert imap_client.get_mail_text_from_last_few(expected_email=expected_email_1, last_few=random_count_of_letters * 3)
+    assert imap_client.get_mail_text_from_last_few(expected_email=expected_email_2, last_few=random_count_of_letters * 3)
 
 
 # Tests with mocked data
