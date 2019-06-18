@@ -6,7 +6,7 @@ For these purposes, there are two main functions:
 1. `get_mail_text_from_last_few`
 2. `get_mail_text_by_id`
 
-#### 1. get_mail_text_from_last_few
+### 1. get_mail_text_from_last_few
 This function looks at each letter in the mailbox and return the letter for the specified user.
 "How is this possible?" - `get_mail_text_from_last_few` requires a unique email address. For example:
  - `some.address+9014@gmail.com`
@@ -22,6 +22,7 @@ Arguments:
 
 ```python
 from datetime import datetime
+
 import pytest
 from py_mail import MailClient
 
@@ -31,6 +32,7 @@ def mail_client():
     yield mail_client
     mail_client.logout()
 
+
 def get_email_by_idimap_client(mail_client):
     expected_email = f'some.address+{datetime.now()}@gmail.com'
     mail = mail_client.get_mail_text_from_last_few(expected_email=expected_email, last_few=10, timeout=60)
@@ -38,7 +40,7 @@ def get_email_by_idimap_client(mail_client):
 ```
 
 
-#### 2. get_mail_text_by_id
+### 2. get_mail_text_by_id
 This function takes the letter by index (the last one is by default) and returns its content (text).
 The downside is that you can get the wrong email:
 because of problems with long delivery or because of the large number of incoming letters
@@ -60,7 +62,7 @@ def mail_client():
 
 
 def get_email_by_id(mail_client):
-    mail = mail_client.get_mail_text_by_id(label='inbox', flag='subject "Confirm your device"')
+    mail = mail_client.get_mail_text_by_id(label='other inbox', flag='subject "Confirm your device"')
     return mail  # or you can search some specific data from letter via regex
 ```
 
