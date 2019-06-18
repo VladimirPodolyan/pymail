@@ -31,7 +31,9 @@ def smtp_client():
 
 @pytest.fixture
 def imap_client():
-    return MailClient(GET_GMAIL_ADDRESS, GET_TOKEN)
+    mail_client = MailClient(GET_GMAIL_ADDRESS, GET_TOKEN)
+    yield mail_client
+    mail_client.logout()
 
 
 def send_mail(server, to, text, subject=None):
@@ -82,7 +84,7 @@ def mocked_imap_client():
 
 def test_delivered_to(mocked_imap_client):
     """ delivered_to is searching and return valid email address """
-    to_address = mocked_imap_client.delivered_to(NOT_PARSED_EMAIL)
+    to_address = mocked_imap_client._delivered_to(NOT_PARSED_EMAIL)
     assert to_address == 'www+ABC123@example.com'
 
 

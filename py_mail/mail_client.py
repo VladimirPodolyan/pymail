@@ -40,11 +40,6 @@ class MailClient(object):
         self.mail.close()
         self.mail.logout()
 
-    def change_label(self, label):
-        new_label = self.label if not label else label
-        if new_label != self.label:
-            self.mail.select(new_label)
-
     def get_mail_text_by_id(self, label=None, flag='ALL', index=-1):
         """
             Get required mail text by index
@@ -72,7 +67,7 @@ class MailClient(object):
         """
         message_instance = self._email_data_from_last_few(expected_email=expected_email, label=label,
                                                           flag=flag, last_few=last_few)
-        actual_email = self.delivered_to(message_instance)
+        actual_email = self._delivered_to(message_instance)
         loop_start = timeit.default_timer()
         get_timeout = 0
 
@@ -80,12 +75,12 @@ class MailClient(object):
             message_instance = self._email_data_from_last_few(expected_email=expected_email,
                                                               flag=flag, last_few=last_few, label=label)
             get_timeout = int(timeit.default_timer() - loop_start)
-            actual_email = self.delivered_to(message_instance)
+            actual_email = self._delivered_to(message_instance)
 
         assert expected_email == actual_email, f'Message for {expected_email} with current settings not found'
         return self._get_first_text_block(message_instance)
 
-    def delivered_to(self, email_message_instance):
+    def _delivered_to(self, email_message_instance):
         """
             Address FOR which the email is delivered
             :param email_message_instance: content of mail if it's available to parse
@@ -106,7 +101,7 @@ class MailClient(object):
             :param label: target label. Will be used this label if then different from MailClient ~ label='inbox'
             :return: content of mail if it's available to parse
         """
-        self.change_label(label)
+        self._change_label(label)
 
         try:
             self._id_list(flag)[index]
@@ -130,7 +125,7 @@ class MailClient(object):
             :param label: target label. Will be used this label if then different from MailClient;
             :return: None if mail for address not found, else content of mail if it's available to parse
         """
-        self.change_label(label)
+        self._change_label(label)
 
         expected_email_message_instance = None
 
@@ -139,7 +134,7 @@ class MailClient(object):
             item = len(data) - 2
             raw_email = data[item][1].decode('utf-8')
             message_instance = email.message_from_string(raw_email)
-            actual_email = self.delivered_to(message_instance)
+            actual_email = self._delivered_to(message_instance)
             if expected_email == actual_email:
                 expected_email_message_instance = message_instance
                 return expected_email_message_instance
@@ -186,3 +181,8 @@ class MailClient(object):
                     return part.get_payload()
         elif maintype == 'text':
             return email_message_instance.get_payload(decode=True)
+
+    def _change_label(self, label):
+        new_label = self.label if not label else label
+        if new_label != self.label:
+            self.mail.select(new_label)
