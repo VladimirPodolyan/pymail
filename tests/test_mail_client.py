@@ -6,8 +6,8 @@ import os
 
 import pytest
 
-from src.mail_client import MailClient
-from src.email_records import NOT_PARSED_EMAIL, PARSED_EMAIL
+from py_mail.mail_client import MailClient
+from py_mail.email_records import NOT_PARSED_EMAIL, PARSED_EMAIL
 
 
 GET_GMAIL_ADDRESS = os.environ['GMAIL_ADDRESS']
