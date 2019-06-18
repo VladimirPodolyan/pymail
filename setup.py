@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.0.4",
     author="PVladimir",
     author_email="vladimir.podolyan64@gmail.com",
-    description="receive data from the gmail mailbox in human readable type",
+    description="Provides data from the gmail mailbox in a human readable type",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/VladimirPodolyan/py-mail",
